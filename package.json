@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "angular": "^1.6.4",
     "body-parser": "1.15.0",
     "express": "~4.13.4",
+    "lodash": "latest",
     "sequelize": "^3.20.0",
-    "sqlite3": "latest",
-    "lodash": "latest"
+    "sqlite3": "latest"
   }
 }

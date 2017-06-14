@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css">
   </head>
   <body>
+    <div ng-app="MockApp">
+
+
 
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -33,11 +36,26 @@
       </div>
     </nav>
 
-    <div class="container">
-      
+    <div class="container" ng-controller="InvoicesController">
+      <div ng-include="'/js/app/invoices/invoices.html'">
+
+      </div>
+
+
     </div> <!-- /container -->
+
+    </div>
 
     <script type="text/javascript" src="/js/lib/jquery/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/js/lib/uirouter/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/js/app/app.module.js"></script>
+    <script type="text/javascript" src="/js/app/invoices/invoices.module.js"></script>
+    <script type="text/javascript" src="/js/app/invoices/invoices.controller.js"></script>
+    <script type="text/javascript" src="/js/app/services/data.service.js"></script>
+
+
+
   </body>
 </html>

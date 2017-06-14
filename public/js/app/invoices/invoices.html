@@ -1,0 +1,14 @@
+<div>
+  <h2>Holla invoices!</h2>
+
+  <div class="row">
+      <div class="col-md-10 col-md-offset-1" ng-show="invoices.length == 0">
+          <h2>There are no current invoices!</h2>
+          <button class="btn btn-default" type="button">Create </button>
+      </div>
+  </div>
+
+  <pre>{{invoices | json }}</pre>
+
+
+</div>
