@@ -4,13 +4,21 @@ angular.module('invoice.item').component('invoiceItem',  {
   bindings: {
    invoice: '=',
    customer: '='
- },
- controller: ['Data', invoiceItemController]
+
+  },
+ controller: ['$scope', 'Data', 'snackbar', invoiceItemController]
 
 })
 
- function invoiceItemController (Data) {
+ function invoiceItemController ($scope, Data, snackbar) {
+      //
+      // getItems = () =>
 
-       this.deleteInvoice = () => Data.deleteInvoice(this.invoice.id)
+      this.$onInit = () => Data.getInvoiceItems(this.invoice.id).then(res => this.items = res.data)
+
+       this.deleteInvoice = () => Data.deleteInvoice(this.invoice.id).then(
+         res => snackbar.show('Invoice deleted') && $scope.$emit('invoices.update'),
+         err => snackbar.err()
+       )
 
  }

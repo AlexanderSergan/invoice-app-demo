@@ -1,5 +1,5 @@
-angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Data',
-    function($scope, $q, Data) {
+angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Data', 'snackbar',
+    function($scope, $q, Data, snackbar) {
 
         $scope.invoices = []
         $scope.customers = []
@@ -7,25 +7,35 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
 
         const fetchData = () => {
-          Data.getInvoices().then(data => $scope.invoices = data.data);
-          Data.getCustomers().then(data => $scope.customers = data.data);
-          Data.getProducts().then(data => $scope.products = data.data);
+            Data.getInvoices().then(data => $scope.invoices = data.data);
+            Data.getCustomers().then(data => $scope.customers = data.data);
+            Data.getProducts().then(data => $scope.products = data.data);
 
         }
 
         $scope.getCustomer = id => {
-          let value
-          $scope.customers.map(customer => {
-            if (customer.id == id)
-              value = customer
-          })
-          return value
+            let value
+            $scope.customers.map(customer => {
+                if (customer.id == id)
+                    value = customer
+            })
+            return value
+        }
+
+        $scope.getProductById = id => {
+            let value
+            $scope.products.map(product => {
+                if (product.id == id)
+                    value = product
+            })
+            return value
+
         }
 
         initNewInvoice = () => $scope.newInvoice = {
-            newItem : {},
+            newItem: {},
             items: []
-          }
+        }
 
         $scope.modalOpenHandler = () => {
             let modalNewInvoice = angular.element('#modal-new-invoice')
@@ -34,51 +44,73 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
         }
 
         $scope.addInvoiceItemHandler = () => {
-          $scope.newInvoice.items.push($scope.newInvoice.newItem)
-          $scope.newInvoice.newItem = {}
+
+            let item = {
+                invoice_id: $scope.newInvoice.id,
+                product_id: $scope.newInvoice.newItem.product.id,
+                quantity: $scope.newInvoice.newItem.quantity,
+            }
+
+            Data.saveInvoiceItem(item).then(
+                res => {
+                    snackbar.show('product added');
+                    if (!$scope.newInvoice.items)
+                        $scope.newInvoice.items = []
+
+                    $scope.newInvoice.items.push(res.data)
+                },
+                err => snackbar.err()
+            )
         }
 
-        $scope.saveInvoiceHandler = () => {
-          // $scope.invoices.push($scope.newInvoice)
-          // initNewInvoice()
-        }
 
         $scope.removePreviewItem = index => $scope.newInvoice.items.splice(index, 1)
 
         $scope.saveInvoice = () => {
 
-          let invoice = {
-            customer_id: $scope.newInvoice.customer.id,
-            discount: $scope.newInvoice.discount || 0,
-            total: $scope.newInvoice.total || 0
-          }
+            if (!$scope.newInvoice.id) {
 
-          Data.saveInvoice(invoice).then((res)=>{
-            console.log(res)
-            fetchData()
-          })
+
+                let invoice = {
+                    customer_id: $scope.newInvoice.customer_id,
+                    discount: $scope.newInvoice.discount || 0,
+                    total: $scope.newInvoice.total || 0
+                }
+
+                Data.saveInvoice(invoice).then((res) => {
+                    console.log(res)
+                    $scope.newInvoice = res.data
+                    snackbar.show('Invoice saved')
+                    fetchData()
+                })
+            } else {
+
+                let invoice = {
+                    id: $scope.newInvoice.id,
+                    customer_id: $scope.newInvoice.customer_id,
+                    discount: $scope.newInvoice.discount,
+                    total: $scope.newInvoice.total
+                }
+
+                Data.editInvoice(invoice).then(
+                    res => snackbar.show('Invoice edited'),
+                    err => snackbar.err()
+                )
+
+            }
         }
 
-        $scope.deleteInvoice = id => Data.deleteInvoice(id)
-
-        /**
-         * ## Invoices
-
-         - id (integer)
-         - customer_id (integer)
-         - discount (decimal)
-         - total (decimal)
-
-         *
-         * */
-
-
+        $scope.deleteInvoice = id => Data.deleteInvoice(id).then(
+            res => snackbar.show('Invoice deleted'),
+            err => snackbar.err()
+        )
 
 
 
 
         initNewInvoice()
         fetchData()
+        $scope.$on('invoices.update', e => fetchData())
 
 
     }

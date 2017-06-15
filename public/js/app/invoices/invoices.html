@@ -34,14 +34,16 @@
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  <h4 class="modal-title">New invoice</h4></div>
+                  <h4 class="modal-title" ng-if="!newInvoice.id">New invoice</h4>
+                  <h4 class="modal-title" ng-if="newInvoice.id">Edit invoice #{{newInvoice.id}}</h4>
+                </div>
               <div class="modal-body">
                 <p>Select Customer</p>
                 <div class="input-group">
                   <div class="input-group-addon"><span>Customer </span></div>
 
                   <select class="form-control" type="text"
-                  ng-model="newInvoice.customer" ng-options="customer as customer.name for customer in customers track by customer.id "></select>
+                  ng-model="newInvoice.customer_id" ng-change="saveInvoice()" ng-options="customer.id as customer.name for customer in customers track by customer.id "></select>
 
                   <div class="input-group-addon"></div>
                 </div>
@@ -79,10 +81,10 @@
                             </thead>
                             <tbody ng-repeat="item in newInvoice.items">
                                 <tr>
-                                    <td>{{ item.product.name }}</td>
-                                    <td>{{ item.product.price }}</td>
+                                    <td>{{ getProductById(item.product_id).name }}</td>
+                                    <td>{{ getProductById(item.product_id).price }}</td>
                                     <td>{{ item.quantity }}</td>
-                                    <td>{{ item.product.price * item.quantity / 100* (100-newInvoice.discount) | number : 2 }}
+                                    <td>{{ getProductById(item.product_id).price * item.quantity / 100* (100-newInvoice.discount) | number : 2 }}
                                       <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
                                       style="margin-top: 0;">x</button>
                                     </td>
