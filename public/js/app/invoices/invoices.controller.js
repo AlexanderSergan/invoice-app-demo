@@ -58,6 +58,8 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                         $scope.newInvoice.items = []
 
                     $scope.newInvoice.items.push(res.data)
+
+                    // TODO: update invoice total here (silent)
                 },
                 err => snackbar.err()
             )
@@ -78,9 +80,9 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                 }
 
                 Data.saveInvoice(invoice).then((res) => {
-                    console.log(res)
                     $scope.newInvoice = res.data
                     snackbar.show('Invoice saved')
+                    console.log(res);
                     fetchData()
                 })
             } else {
@@ -93,7 +95,7 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                 }
 
                 Data.editInvoice(invoice).then(
-                    res => snackbar.show('Invoice edited'),
+                    res => snackbar.show('Invoice edited') && console.log(res) && fetchData(),
                     err => snackbar.err()
                 )
 

@@ -52,7 +52,7 @@
                   <div class="input-group">
                       <div class="input-group-addon"><span>Product </span></div>
 
-                      <select class="form-control" type="text"
+                      <select class="form-control" type="text" ng-disabled="!newInvoice.id"
                              ng-model="newInvoice.newItem.product"
                              ng-options="product as product.name for product in products track by product.id"></select>
 
@@ -60,7 +60,7 @@
                   </div>
                   <div class="input-group">
                       <div class="input-group-addon"><span>Quantity </span></div>
-                      <input class="form-control" type="number"
+                      <input class="form-control" type="number" ng-disabled="!newInvoice.id"
                              ng-model="newInvoice.newItem.quantity">
                       <div class="input-group-addon"></div>
                   </div>
@@ -100,17 +100,20 @@
                   <div class="input-group">
                     <div class="input-group-addon"><span>Discount </span></div>
                     <input class="form-control" type="number" min="0" max="100"
-                    ng-model="newInvoice.discount">
+                      ng-disabled="!newInvoice.id"
+                      ng-model="newInvoice.discount"
+                      ng-blur='saveInvoice()'>
                     <div class="input-group-addon"></div>
+
                   </div>
                   <br>
 
               </div>
               <div class="modal-footer">
-
+<!--
                   <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
                   <button class="btn btn-primary" type="button" ng-click="saveInvoice()"
-                          data-dismiss="modal" >Save</button>
+                          data-dismiss="modal" >Save</button> -->
                   <br>
                   <pre>{{newInvoice | json }}</pre>
               </div>
