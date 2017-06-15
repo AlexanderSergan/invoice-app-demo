@@ -1,0 +1,38 @@
+.table>tbody>tr>td.border-top-black {
+  border-top: 1px solid black;
+}
+table.table-total {
+    width: 25%;
+    margin-left: 75%;
+}
+
+table .label-right {
+  text-align: right;
+}
+
+table .label-center {
+  text-align: center;
+}
+
+.heading-absolute {
+  width: 50%;
+  position: absolute;
+  margin-top: 10px;
+}
+
+div.invoice {
+    background-color: white;
+    margin: 20px 0;
+    padding: 13px 23px;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 2px;
+    border: 0;
+    transition: box-shadow 0.25s;
+
+}
+
+div.invoice:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.23), 0 6px 20px 0 rgba(0, 0, 0, 0.22);
+    transition: box-shadow 0.25s;
+}

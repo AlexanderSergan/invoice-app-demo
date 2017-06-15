@@ -13,6 +13,15 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
         }
 
+        $scope.getCustomer = id => {
+          let value
+          $scope.customers.map(customer => {
+            if (customer.id == id)
+              value = customer
+          })
+          return value
+        }
+
         initNewInvoice = () => $scope.newInvoice = {
             newItem : {},
             items: []
@@ -50,7 +59,7 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
           })
         }
 
-        $scope.deleteInvoice = id => Data.deleteInvoice(id) 
+        $scope.deleteInvoice = id => Data.deleteInvoice(id)
 
         /**
          * ## Invoices

@@ -1,40 +1,73 @@
-<div>
-  <div class="col-md-12">
-      <h1>Invoice #{{ $ctrl.invoice.id }}</h1>
-      <div class="table-responsive">
-          <table class="table">
-              <thead>
-                  <tr>
-                      <th>Item </th>
-                      <th>Product </th>
-                      <th>Price </th>
-                      <th>Quantity </th>
-                  </tr>
-              </thead>
-              <tbody>
-                <!-- items repeat -->
-                  <tr>
-                      <td>1 </td>
-                      <td>Barberry </td>
-                      <td>35.50 </td>
-                      <td>1 </td>
-                  </tr>
+<div class="invoice row">
+  <div class="container-fluid">
 
-                  <!-- items repeat -->
-                  <tr>
-                      <td>10% </td>
-                      <td><strong>Discount</strong> </td>
-                  </tr>
-                  <tr>
-                      <td>{{ $ctrl.invoice.discount }}$</td>
-                      <td><strong>Total</strong> </td>
-                  </tr>
-              </tbody>
-          </table>
+    <div class="row">
+      <div class="col-md-12" style="height: 50px;">
+        <h3  class="heading-absolute">Invoice #{{ $ctrl.invoice.id }}</h2>
+
+        <button type="button" name="button" class="btn btn-warn pull-right" ng-click="$ctrl.deleteInvoice()">delete</button>
+        <button type="button" name="button" class="btn btn-warn pull-right">edit</button>
+
       </div>
-  </div>
 
-  <button type="button" name="button" class="btn btn-warn" ng-click="$ctrl.deleteInvoice()">delete</button>
+      <div class="col-md-4 col-sm-5">
+        <h5><strong>From: </strong></h5>
+        <h4>Mock Organisation</h4>
+        <h6>37 N. Oakwood Ave. Stevens Point, WI 54481</h6>
+        <h6> phone: (123) 937-9992</h6></div>
+        <div class="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-2">
+          <h5><strong>To: </strong></h5>
+          <h4>{{ $ctrl.customer.name }}</h4>
+          <h6>{{ $ctrl.customer.address }}</h6>
+          <h6> phone: {{ $ctrl.customer.phone }}</h6></div>
+        </div>
 
-  <pre>{{$ctrl.invoice | json }}</pre>
+      </div>
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">Item </th>
+                        <th style="width: 35%">Product </th>
+                        <th class="label-right">Price </th>
+                        <th class="label-right">Quantity </th>
+                        <th class="label-right">Total price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 </td>
+                        <td>Barberry </td>
+                        <td class="label-right">35.50 </td>
+                        <td class="label-right">1 </td>
+                        <td class="label-right">1 </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-total">
+                <tbody>
+                    <tr>
+                        <td class="border-top-black label-right"><strong>Discount: </strong></td>
+                        <td class="border-top-black">10%</td>
+                    </tr>
+                    <tr>
+                        <td class="label-right"><strong>Total: </strong></td>
+                        <td>{{ $ctrl.invoice.discount }}$</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+    <!-- <pre>{{$ctrl | json}}</pre> -->
+
 </div>

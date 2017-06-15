@@ -11,7 +11,8 @@
 
             <div class="invoice-list-wrapper" ng-repeat="invoice in invoices">
 
-              <invoice-item invoice="invoice"></invoice-item>
+
+              <invoice-item invoice="invoice" customer="getCustomer(invoice.customer_id)"></invoice-item>
             </div>
 
           </div>
@@ -73,16 +74,19 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
+                                    <th>Total price</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="item in newInvoice.items">
                                 <tr>
                                     <td>{{ item.product.name }}</td>
                                     <td>{{ item.product.price }}</td>
-                                    <td>{{ item.quantity }}
-                                        <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
-                                                style="margin-top: 0;">x</button>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.product.price * item.quantity / 100* (100-newInvoice.discount) | number : 2 }}
+                                      <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
+                                      style="margin-top: 0;">x</button>
                                     </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -93,7 +97,7 @@
                   <p>Discount</p>
                   <div class="input-group">
                     <div class="input-group-addon"><span>Discount </span></div>
-                    <input class="form-control" type="number"
+                    <input class="form-control" type="number" min="0" max="100"
                     ng-model="newInvoice.discount">
                     <div class="input-group-addon"></div>
                   </div>
