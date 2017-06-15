@@ -1,4 +1,40 @@
 <div>
-  <h3>invoice item</h3>
+  <div class="col-md-12">
+      <h1>Invoice #{{ $ctrl.invoice.id }}</h1>
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Item </th>
+                      <th>Product </th>
+                      <th>Price </th>
+                      <th>Quantity </th>
+                  </tr>
+              </thead>
+              <tbody>
+                <!-- items repeat -->
+                  <tr>
+                      <td>1 </td>
+                      <td>Barberry </td>
+                      <td>35.50 </td>
+                      <td>1 </td>
+                  </tr>
 
+                  <!-- items repeat -->
+                  <tr>
+                      <td>10% </td>
+                      <td><strong>Discount</strong> </td>
+                  </tr>
+                  <tr>
+                      <td>{{ $ctrl.invoice.discount }}$</td>
+                      <td><strong>Total</strong> </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+  <button type="button" name="button" class="btn btn-warn" ng-click="$ctrl.deleteInvoice()">delete</button>
+
+  <pre>{{$ctrl.invoice | json }}</pre>
 </div>

@@ -1,18 +1,116 @@
 <div>
-  <h2>Holla invoices!</h2>
-
   <div class="row">
-      <div class="col-md-10 col-md-offset-1" ng-show="invoices.length == 0">
-          <h2>There are no current invoices!</h2>
-          <button class="btn btn-default" type="button">Create </button>
+      <div class="col-md-10 col-md-offset-1">
+          <h2  ng-show="invoices.length == 0">There are no current invoices!</h2>
+          <button class="btn btn-default" ng-click="modalOpenHandler()" type="button">Create </button>
       </div>
+
+
+          <div class="col-md-10 col-md-offset-1" ng-show="invoices.length > 0">
+            <h2>Invoices list </h2>
+
+            <div class="invoice-list-wrapper" ng-repeat="invoice in invoices">
+
+              <invoice-item invoice="invoice"></invoice-item>
+            </div>
+
+          </div>
   </div>
 
-  <pre>{{invoices | json }}</pre>
+
+  <!-- <pre>{{invoices | json }}</pre>
+  <pre>{{customers | json }}</pre>
+  <pre>{{products | json }}</pre>
+ -->
+
+  <!-- <br> -->
 
 
-  <br>
-  <invoice-item></invoice-item>
+
+
+  <div class="modal fade" id="modal-new-invoice" role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">New invoice</h4></div>
+              <div class="modal-body">
+                <p>Select Customer</p>
+                <div class="input-group">
+                  <div class="input-group-addon"><span>Customer </span></div>
+
+                  <select class="form-control" type="text"
+                  ng-model="newInvoice.customer" ng-options="customer as customer.name for customer in customers track by customer.id "></select>
+
+                  <div class="input-group-addon"></div>
+                </div>
+                <br>
+                <p>Add products</p>
+                  <div class="input-group">
+                      <div class="input-group-addon"><span>Product </span></div>
+
+                      <select class="form-control" type="text"
+                             ng-model="newInvoice.newItem.product"
+                             ng-options="product as product.name for product in products track by product.id"></select>
+
+                      <div class="input-group-addon"></div>
+                  </div>
+                  <div class="input-group">
+                      <div class="input-group-addon"><span>Quantity </span></div>
+                      <input class="form-control" type="number"
+                             ng-model="newInvoice.newItem.quantity">
+                      <div class="input-group-addon"></div>
+                  </div>
+
+                          <button class="btn btn-default pull-right" ng-click="addInvoiceItemHandler()"
+                                  type="button" ng-disabled="!newInvoice.newItem.product || !newInvoice.newItem.quantity">Add</button>
+                  <br>
+                  <div class="invoices-preview-wrapper"  ng-show="newInvoice.items.length > 0">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="item in newInvoice.items">
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.product.price }}</td>
+                                    <td>{{ item.quantity }}
+                                        <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
+                                                style="margin-top: 0;">x</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <br>
+
+                  <p>Discount</p>
+                  <div class="input-group">
+                    <div class="input-group-addon"><span>Discount </span></div>
+                    <input class="form-control" type="number"
+                    ng-model="newInvoice.discount">
+                    <div class="input-group-addon"></div>
+                  </div>
+                  <br>
+
+              </div>
+              <div class="modal-footer">
+
+                  <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="button" ng-click="saveInvoice()"
+                          data-dismiss="modal" >Save</button>
+                  <br>
+                  <pre>{{newInvoice | json }}</pre>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
 </div>

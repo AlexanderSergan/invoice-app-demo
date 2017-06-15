@@ -13,6 +13,10 @@ app.service('Data', ['$http', function($http) {
 
   this.getProducts = (id = '') => $http.get(`${this.endpoints.products}/${id}`)
 
+  this.saveInvoice = (invoice) => $http.post(this.endpoints.invoices, invoice)
+
+  this.deleteInvoice = (id) => $http.delete(`${this.endpoints.invoices}/${id}`)
+
 
 
 

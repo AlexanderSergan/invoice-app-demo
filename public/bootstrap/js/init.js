@@ -1,5 +1,5 @@
 $(function() {
     $.material.init()
 
-    console.log('successful')
+    console.log('init successful')
 })
