@@ -1,6 +1,7 @@
 const app = angular.module('MockApp', [
     'ui.router',
-    'invoices'
+    'invoices',
+    'invoice.item'
 ])
 
 
