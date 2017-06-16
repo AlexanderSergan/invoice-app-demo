@@ -1,5 +1,5 @@
-angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Data', 'snackbar',
-    function($scope, $q, Data, snackbar) {
+angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Data', 'snackbar', '$filter',
+    function($scope, $q, Data, snackbar, $filter) {
 
         $scope.invoices = []
         $scope.customers = []
@@ -10,6 +10,15 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
             Data.getCustomers().then(data => $scope.customers = data.data);
             Data.getProducts().then(data => $scope.products = data.data);
         }
+
+        initNewInvoice = () => $scope.newInvoice = {
+            newItem: {},
+            items: []
+        }
+
+        /*
+            Value `Getter` helpers
+        */
 
         $scope.getCustomer = id => {
             let value
@@ -27,13 +36,26 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                     value = product
             })
             return value
-
         }
 
-        initNewInvoice = () => $scope.newInvoice = {
-            newItem: {},
-            items: []
-        }
+        // $scope.getById = (arr, id) => {
+        //   let value
+        //   arr.map(item => {
+        //     if (item.id == id)
+        //       value = item
+        //   })
+        //   return value
+        // }
+
+        $scope.getProductTotal = (productId, quantity, discount = 0) =>
+          $scope.getProductById(productId).price * quantity / 100 * (100 - discount)
+
+
+
+
+        /*
+          Button handlers
+        */
 
         $scope.modalOpenHandler = () => {
             let modalNewInvoice = angular.element('#modal-new-invoice')
@@ -57,19 +79,28 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
                     $scope.newInvoice.items.push(res.data)
 
-                    $scope.newInvoice.total += $scope.newInvoice.items.map( item =>
-                       $scope.getProductTotal(item.product_id, item.quantity, $scope.newInvoice.discount)
-                    )
-
-                    $scope.saveInvoice()
+                    $scope.updateNewInvoiceTotal()
 
                 },
                 err => snackbar.err()
             )
         }
 
+        $scope.updateNewInvoiceTotal = () => {
 
-        $scope.removePreviewItem = index => $scope.newInvoice.items.splice(index, 1)
+          $scope.newInvoice.total = 0
+
+          $scope.newInvoice.items.map( item =>
+            $scope.newInvoice.total += $scope.getProductTotal(item.product_id, item.quantity, $scope.newInvoice.discount)
+          )
+
+           $scope.saveInvoice()
+        }
+
+
+        /*
+            DB interactors
+        */
 
         $scope.saveInvoice = () => {
 
@@ -103,18 +134,6 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
             }
         }
 
-        $scope.getProductTotal = (productId, quantity, discount = 0) => {
-          return $scope.getProductById(productId).price * quantity / 100 * (100 - discount)
-          // getProductById(item.product_id).price * item.quantity / 100* (100-newInvoice.discount)
-        }
-
-        // getTotal = () => {
-        //   let total
-        //   $scope.newInvoice.items.map( item => {
-        //     console.log();
-        //   })
-        // }
-
         $scope.deleteInvoice = id => Data.deleteInvoice(id).then(
             res => snackbar.show('Invoice deleted'),
             err => snackbar.err()
@@ -122,10 +141,22 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
 
 
+        // TODO: implement product item DB remove
+        $scope.removePreviewItem = index => $scope.newInvoice.items.splice(index, 1)
+
+
+        /*
+            Event handlers
+        */
+
+        $scope.$on('invoices.update', e => fetchData())
+
+        /*
+            Init functions
+        */
 
         initNewInvoice()
         fetchData()
-        $scope.$on('invoices.update', e => fetchData())
 
 
     }

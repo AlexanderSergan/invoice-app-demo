@@ -18,6 +18,8 @@ angular.module('invoice.item').component('invoiceItem',  {
         TODO: this data flow will be refactored
       */
 
+
+
       this.$onInit = () => {
         Data.getInvoiceItems(this.invoice.id).then(
           res => {
@@ -25,7 +27,6 @@ angular.module('invoice.item').component('invoiceItem',  {
 
             this.items.map( item => {
               angular.merge(item, this.getProductById(item.product_id))
-
 
               item.total = item.price * item.quantity / 100 * (100 - this.invoice.discount)
               // debugger;

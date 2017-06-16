@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in $ctrl.items">
-                        <td>{{ $index }} </td>
+                        <td>{{ $index +1}} </td>
                         <td>{{ item.name}} </td>
                         <td class="label-right">{{ item.price }} </td>
                         <td class="label-right">{{ item.quantity }}</td>
@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <td class="label-right"><strong>Total: </strong></td>
-                        <td>{{ $ctrl.invoice.total }} </td>
+                        <td>{{ $ctrl.invoice.total | number : 2}}$ </td>
                     </tr>
                 </tbody>
             </table>
