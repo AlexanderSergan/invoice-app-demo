@@ -5,6 +5,8 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
         $scope.customers = []
         $scope.products = []
 
+        $scope.snackbar = snackbar
+
         const fetchData = () => {
             Data.getInvoices().then(data => $scope.invoices = data.data);
             Data.getCustomers().then(data => $scope.customers = data.data);
@@ -38,14 +40,14 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
             return value
         }
 
-        // $scope.getById = (arr, id) => {
-        //   let value
-        //   arr.map(item => {
-        //     if (item.id == id)
-        //       value = item
-        //   })
-        //   return value
-        // }
+        $scope.getById = (arr, id) => {
+          let value
+          arr.map(item => {
+            if (item.id == id)
+              value = item
+          })
+          return value
+        }
 
         $scope.getProductTotal = (productId, quantity, discount = 0) =>
           $scope.getProductById(productId).price * quantity / 100 * (100 - discount)
@@ -84,6 +86,17 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                 },
                 err => snackbar.err()
             )
+        }
+
+        $scope.$on('invoices.edit', (e, data) => {
+          editInvoiceHandler(data)
+        })
+
+        editInvoiceHandler = (data) => {
+            $scope.newInvoice = $scope.getById($scope.invoices, data.id)
+            $scope.newInvoice.customer = $scope.getById($scope.customers, $scope.newInvoice.customer_id)
+            $scope.newInvoice.items = data.products
+            $scope.modalOpenHandler()
         }
 
         $scope.updateNewInvoiceTotal = () => {
@@ -139,10 +152,20 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
             err => snackbar.err()
         )
 
+        $scope.deleteInvoiceItem = (item, index) => {
 
+            console.log(item);
 
-        // TODO: implement product item DB remove
-        $scope.removePreviewItem = index => $scope.newInvoice.items.splice(index, 1)
+            Data.deleteInvoiceItem($scope.newInvoice.id, item.id).then(
+              res => {
+                snackbar.show('Item removed')
+                // let index = $scope.newInvoice.items.indexOf(item)
+                $scope.newInvoice.items.splice(index, 1)
+                $scope.updateNewInvoiceTotal()
+              },
+              err => snackbar.err()
+            )
+          }
 
 
         /*

@@ -15,23 +15,28 @@ angular.module('invoice.item').component('invoiceItem',  {
 
 
       /*
-        TODO: this data flow will be refactored
+
+        TODO: this  ugly spagetti data  flow will be refactored
       */
 
-
-
-      this.$onInit = () => {
+      initInvoiceItems = () => {
         Data.getInvoiceItems(this.invoice.id).then(
           res => {
             this.items = res.data
 
+
             this.items.map( item => {
+              itemId = item.id
               angular.merge(item, this.getProductById(item.product_id))
 
+              item.id = itemId
               item.total = item.price * item.quantity / 100 * (100 - this.invoice.discount)
-              // debugger;
             })
           })
+      }
+
+      this.$onInit = () => {
+      initInvoiceItems()
       }
 
        this.deleteInvoice = () => Data.deleteInvoice(this.invoice.id).then(
@@ -47,6 +52,14 @@ angular.module('invoice.item').component('invoiceItem',  {
                    value = product
            })
            return value
+
+       }
+
+
+
+       this.editInvoice = () => {
+         $scope.$emit('invoices.edit',{id: this.invoice.id, products: this.items})
+         initInvoiceItems()
 
        }
 

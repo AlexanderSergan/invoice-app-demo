@@ -22,6 +22,7 @@ app.service('Data', ['$http', function($http) {
   this.editInvoice = (invoice) => $http.put(`${this.endpoints.invoices}/${invoice.id}`, invoice)
 
   this.saveInvoiceItem = (item) => $http.post(`${this.endpoints.invoices}/${item.invoice_id}/items`, item)
+  this.deleteInvoiceItem = (invoice_id, product_id) => $http.delete(`${this.endpoints.invoices}/${invoice_id}/items/${product_id}`, {timeout: 3000})
 
   this.deleteInvoice = (id) => $http.delete(`${this.endpoints.invoices}/${id}`)
 

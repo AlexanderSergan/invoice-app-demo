@@ -9,7 +9,7 @@
           <div class="col-md-10 col-md-offset-1" ng-show="invoices.length > 0">
             <h2>Invoices list </h2>
 
-            <div class="invoice-list-wrapper" ng-repeat="invoice in invoices">
+            <div class="invoice-list-wrapper" ng-repeat="invoice in invoices | orderBy: 'updatedAt':true ">
 
 
               <invoice-item invoice="invoice" customer="getCustomer(invoice.customer_id)" products="products"></invoice-item>
@@ -17,16 +17,6 @@
 
           </div>
   </div>
-
-
-  <!-- <pre>{{invoices | json }}</pre>
-  <pre>{{customers | json }}</pre>
-  <pre>{{products | json }}</pre>
- -->
-
-  <!-- <br> -->
-
-
 
 
   <div class="modal fade" id="modal-new-invoice" role="dialog" tabindex="-1">
@@ -38,14 +28,19 @@
                   <h4 class="modal-title" ng-if="newInvoice.id">Edit invoice #{{newInvoice.id}}</h4>
                 </div>
               <div class="modal-body">
-                <p>Select Customer</p>
+                <p>Select Customer </p>
+
                 <div class="input-group">
                   <div class="input-group-addon"><span>Customer </span></div>
 
                   <select class="form-control" type="text"
-                  ng-model="newInvoice.customer_id" ng-change="saveInvoice()" ng-options="customer.id as customer.name for customer in customers track by customer.id "></select>
+                   ng-model="newInvoice.customer_id"
 
-                  <div class="input-group-addon"></div>
+                   ng-change="saveInvoice()"
+                   ng-options="customer.id as customer.name for customer in customers track by customer.id ">
+                 </select>
+
+                  <div class="input-group-addon">     </div>
                 </div>
                 <br>
                 <p>Add products</p>
@@ -65,7 +60,7 @@
                       <div class="input-group-addon"></div>
                   </div>
 
-                          <button class="btn btn-default pull-right" ng-click="addInvoiceItemHandler()"
+                          <button class="btn btn-primary pull-right" ng-click="addInvoiceItemHandler()"
                                   type="button" ng-disabled="!newInvoice.newItem.product || !newInvoice.newItem.quantity">Add</button>
                   <br>
                   <div class="invoices-preview-wrapper"  ng-show="newInvoice.items.length > 0">
@@ -81,11 +76,11 @@
                             </thead>
                             <tbody ng-repeat="item in newInvoice.items">
                                 <tr>
-                                    <td>{{ getProductById(item.product_id).name }}</td>
+                                    <td>{{ getProductById(item.product_id).name }}, {{item.id }}</td>
                                     <td>{{ getProductById(item.product_id).price }}</td>
                                     <td>{{ item.quantity }}</td>
                                     <td>{{ getProductTotal(item.product_id, item.quantity, newInvoice.discount) | number : 2 }}
-                                      <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
+                                      <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="deleteInvoiceItem(item, $index)"
                                       style="margin-top: 0;">x</button>
                                     </td>
 
@@ -114,8 +109,8 @@
                   <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
                   <button class="btn btn-primary" type="button" ng-click="saveInvoice()"
                           data-dismiss="modal" >Save</button> -->
-                  <br>
-                  <pre>{{newInvoice | json }}</pre>
+                  <!-- <br>
+                  <pre>{{newInvoice | json }}</pre> -->
               </div>
           </div>
       </div>

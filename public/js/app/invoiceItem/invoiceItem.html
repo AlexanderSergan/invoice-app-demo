@@ -6,7 +6,7 @@
         <h3  class="heading-absolute">Invoice #{{ $ctrl.invoice.id }}</h2>
 
         <button type="button" name="button" class="btn btn-warn pull-right" ng-click="$ctrl.deleteInvoice()">delete</button>
-        <button type="button" name="button" class="btn btn-warn pull-right">edit</button>
+        <button type="button" name="button" class="btn btn-warn pull-right" ng-click="$ctrl.editInvoice()">edit</button>
 
       </div>
 
@@ -43,7 +43,7 @@
                 <tbody>
                     <tr ng-repeat="item in $ctrl.items">
                         <td>{{ $index +1}} </td>
-                        <td>{{ item.name}} </td>
+                        <td>{{ item.name}}, {{item.id}} </td>
                         <td class="label-right">{{ item.price }} </td>
                         <td class="label-right">{{ item.quantity }}</td>
                         <td class="label-right">{{ item.total | number : 2 }}$</td>
