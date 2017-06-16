@@ -46,7 +46,7 @@
                         <td>{{ item.name}} </td>
                         <td class="label-right">{{ item.price }} </td>
                         <td class="label-right">{{ item.quantity }}</td>
-                        <td class="label-right">xz </td>
+                        <td class="label-right">{{ item.total | number : 2 }}$</td>
                     </tr>
 
                 </tbody>
@@ -55,11 +55,11 @@
                 <tbody>
                     <tr>
                         <td class="border-top-black label-right"><strong>Discount: </strong></td>
-                        <td class="border-top-black">10%</td>
+                        <td class="border-top-black">{{ $ctrl.invoice.discount }}%</td>
                     </tr>
                     <tr>
                         <td class="label-right"><strong>Total: </strong></td>
-                        <td>{{ $ctrl.invoice.discount }}$</td>
+                        <td>{{ $ctrl.invoice.total }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -67,7 +67,8 @@
 
         </div>
     </div>
-<!-- 
-    <pre>{{$ctrl | json}}</pre> -->
+
+    <!-- <pre>{{$ctrl.items | json}}</pre>
+    <pre>{{$ctrl.invoice | json}}</pre> -->
 
 </div>

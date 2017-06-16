@@ -5,12 +5,10 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
         $scope.customers = []
         $scope.products = []
 
-
         const fetchData = () => {
             Data.getInvoices().then(data => $scope.invoices = data.data);
             Data.getCustomers().then(data => $scope.customers = data.data);
             Data.getProducts().then(data => $scope.products = data.data);
-
         }
 
         $scope.getCustomer = id => {
@@ -53,13 +51,18 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
             Data.saveInvoiceItem(item).then(
                 res => {
-                    snackbar.show('product added');
+                    snackbar.show('Product added');
                     if (!$scope.newInvoice.items)
                         $scope.newInvoice.items = []
 
                     $scope.newInvoice.items.push(res.data)
 
-                    // TODO: update invoice total here (silent)
+                    $scope.newInvoice.total += $scope.newInvoice.items.map( item =>
+                       $scope.getProductTotal(item.product_id, item.quantity, $scope.newInvoice.discount)
+                    )
+
+                    $scope.saveInvoice()
+
                 },
                 err => snackbar.err()
             )
@@ -72,7 +75,6 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
 
             if (!$scope.newInvoice.id) {
 
-
                 let invoice = {
                     customer_id: $scope.newInvoice.customer_id,
                     discount: $scope.newInvoice.discount || 0,
@@ -82,9 +84,9 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                 Data.saveInvoice(invoice).then((res) => {
                     $scope.newInvoice = res.data
                     snackbar.show('Invoice saved')
-                    console.log(res);
                     fetchData()
                 })
+
             } else {
 
                 let invoice = {
@@ -95,12 +97,23 @@ angular.module('invoices').controller('InvoicesController', ['$scope', '$q', 'Da
                 }
 
                 Data.editInvoice(invoice).then(
-                    res => snackbar.show('Invoice edited') && console.log(res) && fetchData(),
+                    res => snackbar.show('Invoice changed') && fetchData(),
                     err => snackbar.err()
                 )
-
             }
         }
+
+        $scope.getProductTotal = (productId, quantity, discount = 0) => {
+          return $scope.getProductById(productId).price * quantity / 100 * (100 - discount)
+          // getProductById(item.product_id).price * item.quantity / 100* (100-newInvoice.discount)
+        }
+
+        // getTotal = () => {
+        //   let total
+        //   $scope.newInvoice.items.map( item => {
+        //     console.log();
+        //   })
+        // }
 
         $scope.deleteInvoice = id => Data.deleteInvoice(id).then(
             res => snackbar.show('Invoice deleted'),

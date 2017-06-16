@@ -12,7 +12,7 @@
             <div class="invoice-list-wrapper" ng-repeat="invoice in invoices">
 
 
-              <invoice-item invoice="invoice" customer="getCustomer(invoice.customer_id)"></invoice-item>
+              <invoice-item invoice="invoice" customer="getCustomer(invoice.customer_id)" products="products"></invoice-item>
             </div>
 
           </div>
@@ -76,7 +76,7 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total price</th>
+                                    <th>Product total</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="item in newInvoice.items">
@@ -84,7 +84,7 @@
                                     <td>{{ getProductById(item.product_id).name }}</td>
                                     <td>{{ getProductById(item.product_id).price }}</td>
                                     <td>{{ item.quantity }}</td>
-                                    <td>{{ getProductById(item.product_id).price * item.quantity / 100* (100-newInvoice.discount) | number : 2 }}
+                                    <td>{{ getProductTotal(item.product_id, item.quantity, newInvoice.discount) | number : 2 }}
                                       <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="removePreviewItem($index)"
                                       style="margin-top: 0;">x</button>
                                     </td>
@@ -98,7 +98,7 @@
 
                   <p>Discount</p>
                   <div class="input-group">
-                    <div class="input-group-addon"><span>Discount </span></div>
+                    <div class="input-group-addon"><span>Discount, % </span></div>
                     <input class="form-control" type="number" min="0" max="100"
                       ng-disabled="!newInvoice.id"
                       ng-model="newInvoice.discount"
