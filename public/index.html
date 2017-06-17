@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/ripples.css">
+    <link rel="stylesheet" type="text/css" href="/js/lib/snackbarjs/snackbar.min.css">
+
 
     <link rel="stylesheet" type="text/css" href="/css/app.css">
   </head>
@@ -31,9 +33,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Customers</a></li>
             <li><a href="#">Invoices</a></li>
+            <li><a href="#" ng-click="snackbar.show('WIP')">Products</a></li>
+            <li><a href="#" ng-click="snackbar.show('WIP')">Customers</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -49,10 +51,15 @@
 
     </div>
 
+
+
     <script type="text/javascript" src="/js/lib/jquery/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bootstrap/js/material.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/ripples.js"></script>
     <script type="text/javascript" src="/bootstrap/js/init.js"></script>
+    <script type="text/javascript" src="/js/lib/snackbarjs/snackbar.min.js"></script>
+
 
 
 
@@ -66,8 +73,11 @@
 
     <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.module.js"></script>
     <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.component.js"></script>
+    <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.controller.js"></script>
 
     <script type="text/javascript" src="/js/app/services/data.service.js"></script>
+    <script type="text/javascript" src="/js/app/services/snackbar.service.js"></script>
+
 
 
 
