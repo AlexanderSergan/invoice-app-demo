@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css">
   </head>
   <body>
-    <div ng-app="MockApp">
+    <div ng-app="InvoiceApp">
 
 
 
@@ -33,23 +33,21 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Invoices</a></li>
-            <li><a href="#" ng-click="snackbar.show('WIP')">Products</a></li>
+            <li><a href="#" ui-sref="invoices">Invoices</a></li>
+            <li><a href="#" ui-sref="invoices.edit">Edit</a></li>
             <li><a href="#" ng-click="snackbar.show('WIP')">Customers</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <div class="container" ng-controller="InvoicesController">
-      <div ng-include="'/js/app/invoices/invoices.html'">
+    <div class="container">
 
-      </div>
+      <ui-view></ui-view>
+    </div>
 
 
     </div> <!-- /container -->
-
-    </div>
 
 
 
@@ -68,16 +66,22 @@
 
     <script type="text/javascript" src="/js/app/app.module.js"></script>
 
-    <script type="text/javascript" src="/js/app/invoices/invoices.module.js"></script>
-    <script type="text/javascript" src="/js/app/invoices/invoices.controller.js"></script>
-
-    <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.module.js"></script>
-    <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.component.js"></script>
-    <script type="text/javascript" src="/js/app/invoiceItem/invoiceItem.controller.js"></script>
-
+    <!-- Services -->
     <script type="text/javascript" src="/js/app/services/data.service.js"></script>
     <script type="text/javascript" src="/js/app/services/snackbar.service.js"></script>
 
+
+   <!-- Components -->
+   <script type="text/javascript" src="/js/app/components/invoicesList/invoicesList.module.js"></script>
+   <script type="text/javascript" src="/js/app/components/invoicesList/invoicesList.component.js"></script>
+
+   <script type="text/javascript" src="/js/app/components/invoiceEdit/invoiceEdit.module.js"></script>
+   <script type="text/javascript" src="/js/app/components/invoiceEdit/invoiceEdit.component.js"></script>
+   <script type="text/javascript" src="/js/app/components/invoiceEdit/invoiceEditProduct.directive.js"></script>
+
+   <script type="text/javascript" src="/js/app/components/invoice/invoice.module.js"></script>
+   <script type="text/javascript" src="/js/app/components/invoice/invoice.component.js"></script>
+   <script type="text/javascript" src="/js/app/components/invoice/invoiceProduct.directive.js"></script>
 
 
 

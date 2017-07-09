@@ -1,0 +1,9 @@
+<tr>
+  <td>{{ $ctrl.product.name }} </td>
+  <td>{{ $ctrl.product.price }} $</td>
+  <td>{{ $ctrl.quantity }}</td>
+  <td>{{ $ctrl.getProductTotal() | number: 2 }} $
+    <button class="btn btn-danger btn-xs pull-right" type="button" ng-click="$ctrl.handleProductDelete()" style="margin-top: 0;">x</button>
+  </td>
+
+</tr>
