@@ -10,6 +10,8 @@ sequelize = new Sequelize('sqlite://' + path.join(__dirname, 'invoices.sqlite'),
   dialect: 'sqlite',
   storage: path.join(__dirname, 'invoices.sqlite')
 });
+sequelize.drop()
+
 
 Customer = sequelize.define('customers', {
   id: {
@@ -76,7 +78,11 @@ InvoiceItem = sequelize.define('invoice_items', {
   }
 });
 
-sequelize.sync().then(function() {
+
+
+sequelize.sync()
+
+  .then(function() {
   Customer.create({
     name: "Mark Benson",
     address: "353 Rochester St, Rialto FL 43250",
@@ -125,7 +131,7 @@ sequelize.sync().then(function() {
 });
 
 var app = module.exports = express();
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 8888);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
