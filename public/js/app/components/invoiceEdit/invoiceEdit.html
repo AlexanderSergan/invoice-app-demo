@@ -1,0 +1,78 @@
+<div class="modal fade" id="modal-new-invoice" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" ng-if="ctrl.invoiceId == 'new'">New invoice</h4>
+        <h4 class="modal-title" ng-if="$ctrl.invoiceId !== 'new'">Edit invoice #{{$ctrl.invoice.id}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Select Customer </p>
+
+        <div class="input-group">
+          <div class="input-group-addon"><span>Customer </span></div>
+
+          <select class="form-control" type="text" ng-model="$ctrl.invoice.customer_id"
+                  ng-change="$ctrl.saveInvoice()"
+                  ng-options="customer.id as customer.name for customer in $ctrl.customers  ">
+               </select>
+
+
+          <div class="input-group-addon"> </div>
+        </div>
+
+        <br>
+        <p>Add products</p>
+        <div class="input-group">
+          <div class="input-group-addon"><span>Product </span></div>
+
+          <select class="form-control" type="text" ng-disabled="" ng-model="$ctrl.newProductId" ng-options="product.id as product.name for product in $ctrl.products track by product.id"></select>
+
+          <div class="input-group-addon"></div>
+        </div>
+        <div class="input-group">
+          <div class="input-group-addon"><span>Quantity </span></div>
+          <input class="form-control" type="number" ng-disabled="false" ng-model="$ctrl.quantity">
+          <div class="input-group-addon"></div>
+        </div>
+
+        <button class="btn btn-primary pull-right" ng-click="$ctrl.handleAddInvoiceItem()" type="button" ng-disabled="!$ctrl.quantity && !$ctrl.newProductId">Add</button>
+        <br>
+        <div class="invoices-preview-wrapper" ng-show="true">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Product total</th>
+                </tr>
+              </thead>
+              <tbody ng-repeat="product in $ctrl.invoiceItems track by $index"
+                      invoice-edit-product product-id="product.product_id"
+                      quantity="product.quantity" invoice-id="$ctrl.invoice.id"
+                      invoice-item-id="product.id" discount="$ctrl.invoice.discount" index="$index"
+                      on-delete="$ctrl.handleProductDelete($index)">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br>
+
+        <p>Discount</p>
+        <div class="input-group">
+          <div class="input-group-addon"><span>Discount, % </span></div>
+          <input class="form-control" type="number" min="0" max="100" ng-disabled="" ng-model="$ctrl.invoice.discount" ng-blur='$ctrl.handleDiscountChange()'>
+          <div class="input-group-addon"></div>
+
+        </div>
+        <br>
+
+      </div>
+      <div class="modal-footer">
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
