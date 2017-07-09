@@ -1,3 +1,16 @@
+# Overview
+
+Simple invoice demo app.
+demo: https://calm-waters-44556.herokuapp.com
+
+# Roadmap
+  - [x] Heroku pipeline deploy.
+  - [ ] Customers page.
+  - [ ] Products page.
+  - [ ] Module tree refactor.
+  - [ ] Documentation.
+  - [ ] Analytics.
+
 # Dependencies
 
 - sqlite3
@@ -70,5 +83,3 @@ GET|PUT|DELETE    /api/invoices/{id}
 GET|POST          /api/invoices/{id}/items
 GET|PUT|DELETE    /api/invoices/{invoice_id}/items/{id}
 ```
-
-
