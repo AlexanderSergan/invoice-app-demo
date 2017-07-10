@@ -1,0 +1,60 @@
+/*
+    Floating button
+*/
+
+#fab {
+  position: absolute;
+  right: 2vw;
+  bottom: 5vh;
+  opacity: 1;
+  transform: rotate(0deg) scale(1, 1);
+  transition: transform .3s ease-in, opacity .4s ease-in;
+}
+
+#fab.hid {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.3, 0.3);
+  transition: transform .3s ease-in, opacity .4s ease-in;
+}
+
+#fab-wrapper.menu-open #fab {
+  transform: rotate(-90deg);
+  opacity: 1;
+  transition: transform .2s ease-in;
+}
+
+
+/*
+  Menu
+*/
+
+#fab-wrapper #fab-menu {
+  position: absolute;
+  right: 7vw;
+  bottom: 11vh;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform .2s ease-in, opacity .2s ease-in;
+}
+
+#fab-wrapper.menu-open #fab-menu {
+  opacity: 1;
+  transform: translateY(0px);
+  bottom: 11vh;
+  transition: transform .2s ease-out, opacity .2s ease-out;
+}
+
+
+/*
+  Icon
+*/
+
+#fab-wrapper #fab i {
+  font-style: normal;
+  transform: rotate(0) transition: transform .2 ease-in;
+}
+
+#fab-wrapper.menu-open #fab i {
+  font-style: normal;
+  transform: rotate(-90deg) transition: transform .2 ease-out;
+}
