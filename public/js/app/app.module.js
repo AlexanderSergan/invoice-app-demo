@@ -1,9 +1,15 @@
 const app = angular.module('InvoiceApp', [
     'ui.router',
-  
+
     'invoice',
     'invoices.list',
-    'invoices.edit'
+    'invoices.edit',
+
+    'customer',
+    'customer.edit',
+    'customers.list',
+
+    'random.userpic'
 ])
 
 
@@ -35,6 +41,29 @@ app.config(function($stateProvider, $urlServiceProvider) {
                     component: 'invoiceEdit',
                 }
             }
+      })
+
+      .state('customers', {
+          url: '/customers',
+          component: 'customersList',
+          resolve: {
+              customers: (Data, snackbar) => Data.getCustomers().then(
+                  res => res.data,
+                  err => snackbar.err()
+              )
+          }
+      })
+
+      .state('customers.edit', {
+        url: '/edit/{customerId:[0-9]+|new}',
+        resolve: {
+            customerId: $transition$ => $transition$.params().customerId
+        },
+        views: {
+            'edit@customers': {
+                component: 'customerEdit'
+            }
+        }
       })
 
 });

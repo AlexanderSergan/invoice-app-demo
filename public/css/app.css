@@ -42,3 +42,26 @@ button.btn:focus,
 select:focus {
   outline: none !important;
 }
+
+.media.customer {
+  min-height: 125px;
+}
+
+img.customer-avatar {
+  border-radius: 50%;
+  width: 100px;
+
+}
+
+.media.customer .media-left {
+  position: absolute;
+  width: 100px;
+}
+
+.media.customer .media-body {
+  margin-left: 120px;
+}
+
+.customer-edit {
+  margin-left: 20px;
+}

@@ -26,13 +26,21 @@ app.service('Data', ['$http', function($http) {
     this.saveInvoice = invoice => invoice.id ?
                                   $http.put(`${this.endpoints.invoices}/${invoice.id}`, invoice) :
                                   $http.post(this.endpoints.invoices, invoice)
-    // this.saveInvoice = (invoice) => $http.post(this.endpoints.invoices, invoice)
-    // this.editInvoice = (invoice) => $http.put(`${this.endpoints.invoices}/${invoice.id}`, invoice)
-
-    this.saveInvoiceItem = (item) => $http.post(`${this.endpoints.invoices}/${item.invoice_id}/items`, item)
-    this.deleteInvoiceItem = (invoice_id, product_id) => $http.delete(`${this.endpoints.invoices}/${invoice_id}/items/${product_id}`)
 
     this.deleteInvoice = (id) => $http.delete(`${this.endpoints.invoices}/${id}`)
+
+
+
+    this.saveInvoiceItem = (item) => $http.post(`${this.endpoints.invoices}/${item.invoice_id}/items`, item)
+
+    this.deleteInvoiceItem = (invoice_id, product_id) => $http.delete(`${this.endpoints.invoices}/${invoice_id}/items/${product_id}`)
+
+    this.saveCustomer = customer => customer.id ?
+                                    $http.put(`${this.endpoints.customers}/${customer.id}`, customer) :
+                                    $http.post(`${this.endpoints.customers}`, customer)
+
+    this.deleteCustomer = id => $http.delete(`${this.endpoints.customers}/${id}`, id)
+
 
 
 

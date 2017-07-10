@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+
+
+    <a href="javascript:void(0)" class="btn btn-raised btn-primary" style="margin-left: 15px;" ui-sref="customers.edit({customerId: 'new'})">New customer</a>
+    <br>
+
+    <br>
+
+    <div ng-repeat="customer in $ctrl.customers">
+
+      <customer customer-id="customer.id"></customer>
+    </div>
+
+  </div>
+
+
+  <ui-view name="edit"> </ui-view>
+
+</div>
