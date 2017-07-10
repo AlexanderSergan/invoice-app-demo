@@ -41,6 +41,9 @@ app.service('Data', ['$http', function($http) {
 
     this.deleteCustomer = id => $http.delete(`${this.endpoints.customers}/${id}`, id)
 
+    this.saveProduct = product => product.id ?
+                                  $http.put(`${this.endpoints.products}/${product.id}`, product) :
+                                  $http.post(`${this.endpoints.products}`, product)
 
 
 

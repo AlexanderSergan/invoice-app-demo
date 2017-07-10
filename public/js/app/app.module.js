@@ -9,6 +9,9 @@ const app = angular.module('InvoiceApp', [
     'customer.edit',
     'customers.list',
 
+    'products.list',
+    'product.edit',
+
     'random.userpic'
 ])
 
@@ -55,16 +58,39 @@ app.config(function($stateProvider, $urlServiceProvider) {
       })
 
       .state('customers.edit', {
-        url: '/edit/{customerId:[0-9]+|new}',
-        resolve: {
-            customerId: $transition$ => $transition$.params().customerId
-        },
-        views: {
-            'edit@customers': {
-                component: 'customerEdit'
-            }
-        }
+          url: '/edit/{customerId:[0-9]+|new}',
+          resolve: {
+              customerId: $transition$ => $transition$.params().customerId
+          },
+          views: {
+              'edit@customers': {
+                  component: 'customerEdit'
+              }
+          }
       })
+
+      .state('products', {
+          url: '/products',
+          component: 'productsList',
+          resolve: {
+              products: (Data, snackbar) => Data.getProducts().then(
+                  res => res.data,
+                  err => snackbar.err()
+              )
+          }
+       })
+
+       .state('products.edit', {
+         url: '/edit/{productId:[0-9]+|new}',
+         resolve: {
+           productId: $transition$ => $transition$.params().productId
+         },
+         views: {
+           'edit@products': {
+             component: 'productEdit'
+           }
+         }
+       })
 
 });
 

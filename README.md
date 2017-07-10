@@ -5,8 +5,9 @@ demo: https://calm-waters-44556.herokuapp.com
 
 # Roadmap
   - [x] Heroku pipeline deploy.
-  - [ ] Customers page.
-  - [ ] Products page.
+  - [x] Customers page.
+  - [x] Products page.
+  - [ ] FAB.
   - [ ] Module tree refactor.
   - [ ] Documentation.
   - [ ] Analytics.

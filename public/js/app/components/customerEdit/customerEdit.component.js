@@ -33,7 +33,6 @@ angular.module('customer.edit').component('customerEdit', {
 
     this.saveCustomer = () => Data.saveCustomer(this.customer).then(
         res => {
-            this.customer = res.data
             if ( this.customerId == 'new' ) {
               snackbar.show('New customer saved.')
               $state.go('customers.edit', {customerId: res.data.id}, {reload: true})
