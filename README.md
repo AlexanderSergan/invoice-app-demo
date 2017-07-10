@@ -7,7 +7,7 @@ demo: https://calm-waters-44556.herokuapp.com
   - [x] Heroku pipeline deploy.
   - [x] Customers page.
   - [x] Products page.
-  - [ ] FAB.
+  - [x] FAB.
   - [ ] Module tree refactor.
   - [ ] Documentation.
   - [ ] Analytics.
