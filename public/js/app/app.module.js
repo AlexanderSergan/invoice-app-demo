@@ -12,7 +12,8 @@ const app = angular.module('InvoiceApp', [
     'products.list',
     'product.edit',
 
-    'random.userpic'
+    'random.userpic',
+    'fab'
 ])
 
 

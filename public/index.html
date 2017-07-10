@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css">
   </head>
   <body>
-    <div ng-app="InvoiceApp">
+    <div ng-app="InvoiceApp" style="min-height: 100vh;">
 
 
 
@@ -45,6 +45,7 @@
 
       <ui-view></ui-view>
     </div>
+    <fab></fab>
 
 
     </div> <!-- /container -->
@@ -107,7 +108,9 @@
 
 
 
-
+   <script type="text/javascript" src="/js/app/components/fab/fab.module.js"></script>
+   <script type="text/javascript" src="/js/app/components/fab/fab.directive.js"></script>
+   <link rel="stylesheet" type="text/css" href="/js/app/components/fab/fab.css">  </link>
 
    <script type="text/javascript" src="/js/app/directives/randomUserpic.directive.js"></script>
 
