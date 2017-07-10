@@ -2,3 +2,5 @@ node_modules
 invoices.sqlite
 layout/
 routes/
+
+app\.js
