@@ -65,3 +65,19 @@ img.customer-avatar {
 .customer-edit {
   margin-left: 20px;
 }
+
+.products-list .cell-sm {
+  width: 15%
+}
+
+.products-list .cell-xs {
+  width: 7%
+}
+
+.products-list .product-item-index {
+  padding-left: 8px;
+}
+
+.centered {
+  text-align: center;
+}

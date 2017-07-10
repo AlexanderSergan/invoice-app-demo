@@ -1,0 +1,15 @@
+<div class="table-responsive">
+    <table class="table products-list table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="cell-xs centered"> #</th>
+                <th style="width:466px;">Product </th>
+                <th class="cell-sm">Price </th>
+                <th class="cell-sm">Actions </th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="product in $ctrl.products" products-list-item product="product", index="$index" ng-class-even="info">
+
+        </tbody>
+    </table>
+</div>
