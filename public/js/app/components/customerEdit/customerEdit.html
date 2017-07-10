@@ -1,0 +1,40 @@
+<div class="modal fade" id="modal-customer-edit" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                <h4 class="modal-title" ng-if="$ctrl.customerId == 'new'">Create new customer.</h4>
+                <h4 class="modal-title" ng-if="$ctrl.customerId !== 'new'">Edit {{ $ctrl.customer.name}}'s profile</h4>
+            </div>
+            <div class="modal-body">
+                <p> </p>
+                <div class="input-group">
+                    <div class="input-group-addon" style="width:20%;"><span style="width:20%;">Name </span></div>
+                    <input class="form-control" type="text"
+                           ng-model="$ctrl.customer.name" ng-blur="$ctrl.saveCustomer()">
+                    <div class="input-group-addon"></div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon" style="width:20%;"><span>Address </span></div>
+                    <input class="form-control" type="text"
+                           ng-model="$ctrl.customer.address" ng-disabled="!$ctrl.customer.name"
+                           ng-blur="$ctrl.saveCustomer()">
+                    <div class="input-group-addon"></div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon" style="width:20%;"><span>Phone </span></div>
+                    <input class="form-control" type="tel"
+                           ng-model="$ctrl.customer.phone" ng-disabled="!$ctrl.customer.name"
+                           ng-blur="$ctrl.saveCustomer()">
+                    <div class="input-group-addon"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <div ng-if="$ctrl.customerId !== 'new'">
+                <button type="" class="btn btn-danger" ng-click="$ctrl.deleteCustomer()" >delete customer</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

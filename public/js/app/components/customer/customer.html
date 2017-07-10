@@ -5,11 +5,13 @@
                 <div class="media customer">
                     <div class="media-left">
                         <a><img random-userpic class="customer-avatar" style="width:100px; border-radius: 50%"></a>
+                        <button type="button" class="btn btn-sm btn-primary customer-edit" style="margin-left: 20px;"
+                        ui-sref="customers.edit({'customerId': $ctrl.customer.id})">edit</button>
                     </div>
                     <div class="media-body">
                         <h2 class="media-heading">{{ $ctrl.customer.name }}</h2>
-                        <h4 class="media-heading">{{ $ctrl.customer.address }}</h4>
-                        <h5 class="media-heading">{{ $ctrl.customer.phone }}</h5>
+                        <h4 class="media-heading">{{ $ctrl.customer.address || 'n/a' }}</h4>
+                        <h5 class="media-heading">{{ $ctrl.customer.phone || 'n/a' }}</h5>
                     </div>
                 </div>
             </div>

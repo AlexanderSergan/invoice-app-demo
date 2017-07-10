@@ -1,7 +1,6 @@
 <div class="row">
 
-  <a href="javascript:void(0)" class="btn btn-raised btn-primary" ui-sref="invoices.edit({invoiceId: 'new'})">New invoice</a>
-  <br>
+  <a class="btn btn-raised btn-primary" ui-sref="invoices.edit({invoiceId: 'new'})">New invoice</a>
 
   <div ng-repeat="invoice in $ctrl.invoices | orderBy: 'updatedAt':true">
 
