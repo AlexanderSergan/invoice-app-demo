@@ -1,5 +1,5 @@
 /**
- * @ngdoc component
+ * @ngdoc overview
  * @name invoiceEdit
  */
 angular.module('invoices.edit').component('invoiceEdit', {

@@ -6,8 +6,8 @@
  * @description
  * Template directive for products list table item
  *
- * @param index {number} index of iteratee
- * @param product {Object} product data object
+ * @param {number} index - index of iteratee
+ * @param {Object} product - product data object
  *
  */
 angular.module('products.list').directive('productsListItem', function() {

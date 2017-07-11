@@ -1,7 +1,7 @@
 /**
- * @ngdoc component
+ * @ngdoc overview
  * @name product.edit:productEdit
- * @param {string|id} productId
+ * @param {string} - productId
  * @description
  *
  *    Customer edit component

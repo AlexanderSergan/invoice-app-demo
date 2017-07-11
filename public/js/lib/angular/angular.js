@@ -172,7 +172,7 @@ function minErr(module, ErrorConstructor) {
 ////////////////////////////////////
 
 /**
- * @ngdoc module
+ * @ngdoc overview
  * @name ng
  * @module ng
  * @installation
@@ -4158,7 +4158,7 @@ var $$MapProvider = [/** @this */function() {
 
 
 /**
- * @ngdoc module
+ * @ngdoc overview
  * @name auto
  * @installation
  * @description

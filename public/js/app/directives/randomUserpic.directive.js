@@ -1,14 +1,6 @@
 /**
- * @ngdoc - module
- * @name - random.userpic
- * @overview - module with random userpic tools
- */
-angular.module('random.userpic', [ ]);
-
-
-/**
- * @ngdoc - directive
- * @name  - random.userpic:randomUserpic
+ * @ngdoc directive
+ * @name random.userpic:randomUserpic
  * @overview - sets random male userpic for img element (https://randomuser.me)
  * @restrict - attribute
  *

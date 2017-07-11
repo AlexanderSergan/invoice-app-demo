@@ -2,6 +2,9 @@
   "name": "interviewed-angular",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "gulp ngdocs && node app.js"
+  },
   "dependencies": {
     "angular": "^1.6.4",
     "body-parser": "1.15.0",
@@ -9,5 +12,9 @@
     "lodash": "latest",
     "sequelize": "^3.20.0",
     "sqlite3": "latest"
+  },
+  "devDependencies": {
+    "gulp-ngdocs": "^0.3.0",
+    "gulp-plumber": "^1.1.0"
   }
 }
