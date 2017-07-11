@@ -2,12 +2,13 @@
 
 Simple invoice demo app.
 demo: https://calm-waters-44556.herokuapp.com
+docs: https://calm-waters-44556.herokuapp.com/docs
 
 # Roadmap
   - [x] Heroku pipeline deploy.
   - [x] Customers page.
   - [x] Products page.
-  - [ ] FAB.
+  - [x] FAB.
   - [ ] Module tree refactor.
   - [ ] Documentation.
   - [ ] Analytics.
