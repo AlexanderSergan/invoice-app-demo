@@ -11,6 +11,7 @@ demo: https://calm-waters-44556.herokuapp.com
   - [ ] Module tree refactor.
   - [ ] Documentation.
   - [ ] Analytics.
+  - [ ] i18n.
 
 # Dependencies
 
