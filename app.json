@@ -1,9 +1,14 @@
 {
   "name": "invoice-app-demo",
-  "scripts": {},
-  "env": {},
-  "formation": {},
-  "addons": [],
+
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+  ],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
