@@ -17,7 +17,7 @@ const app = angular.module('InvoiceApp', [
 ])
 
 
-app.config(function($stateProvider, $urlServiceProvider) {
+app.config(function($stateProvider, $urlServiceProvider, $locationProvider) {
 
     $urlServiceProvider.rules.otherwise({
         state: 'invoices'
@@ -92,6 +92,13 @@ app.config(function($stateProvider, $urlServiceProvider) {
            }
          }
        })
+
+       $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false,
+            rewriteLinks: false
+        });
+
 
 });
 
