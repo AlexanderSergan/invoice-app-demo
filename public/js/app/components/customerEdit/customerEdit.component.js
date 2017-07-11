@@ -1,12 +1,13 @@
 /**
- * @ngdoc component
+ * @ngdoc overview
  * @name customer.edit:customerEdit
- * @param {string|id} customerId
+ * @param {*} - customerId
  * @description
  *
  *    Customer edit component
  *
  */
+
 angular.module('customer.edit').component('customerEdit', {
 
   bindings: {
