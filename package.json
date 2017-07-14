@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "gulp ngdocs && node app.js"
+    "start": "{ gulp ngdocs & node app.js & }"
   },
   "dependencies": {
     "angular": "^1.6.4",
