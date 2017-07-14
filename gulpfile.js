@@ -6,7 +6,7 @@ gulp.task('ngdocs', [], function () {
   return gulp.src('public/js/app/**/*.js')
     .pipe(plumber())
     .pipe(gulpDocs.process())
-    .pipe(gulp.dest('public/docs'));
+    .pipe(gulp.dest('public/docs/'));
 });
 
 gulp.task('watch-ngdocs', [], function() {

@@ -136,6 +136,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/docs', (req, res) => res.sendFile(path.join(__dirname, 'public/docs/index.html')))
+
 // CUSTOMERS API
 
 app.route('/api/customers')
