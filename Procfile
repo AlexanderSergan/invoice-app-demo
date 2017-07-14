@@ -1,1 +1,1 @@
-web: npm docs && npm start
+web: npm run docs && npm start
